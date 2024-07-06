@@ -1,0 +1,222 @@
+<mat-sidenav-container>
+  <mat-sidenav-content class="">
+    <mat-toolbar class="topbar topbar-xl m-auto">
+      <div class="container full-width p-xs-6 justify-content-between">
+        <!-- --------------------------------------------------------------- -->
+        <div class="branding p-x-0">
+          <a href="/" *ngIf="options.theme === 'light'">
+            <img src="./assets/images/logos/invertirYa-logo.png" class="align-middle m-2" alt="logo" />
+          </a>
+          <a href="/" *ngIf="options.theme === 'dark'">
+            <img src="./assets/images/logos/invertirYa-logo.png" class="align-middle m-2" alt="logo" />
+          </a>
+        </div>
+
+        <!-- --------------------------------------------------------------- -->
+
+        <div class="d-none d-lg-flex">
+          <!-- --------------------------------------------------------------- -->
+          <!--  Links -->
+          <!-- --------------------------------------------------------------- -->
+          <button mat-button class="m-x-8 f-s-16 f-w-500" [routerLink]="['/']">
+            Inicio
+          </button>
+
+          <!-- --------------------------------------------------------------- -->
+          <!--  Links -->
+          <!-- --------------------------------------------------------------- -->
+          <button mat-button class="m-x-8 f-s-16 f-w-500" [matMenuTriggerFor]="appsmenu" aria-label="Notifications">
+            <div class="d-flex align-items-center">
+              Herramientas
+              <i-tabler name="chevron-down" class="icon-16 m-l-4"></i-tabler>
+            </div>
+          </button>
+          <mat-menu #appsmenu="matMenu" class="apps-dd cardWithShadow">
+            <div class="row">
+              <div class="col-sm-8 b-r-1 p-r-0">
+                <div class="p-32 p-b-0">
+                  <div class="row">
+                    <div class="col-sm-6 text-hover-primary" *ngFor="let appdd of apps">
+                      <a [routerLink]="[appdd.link]" class="d-flex align-items-center text-decoration-none m-b-24">
+                        <button mat-mini-fab class="text-primary bg-light-primary shadow-none rounded">
+                          <img [src]="appdd.img" width="20" />
+                        </button>
+
+                        <div class="m-l-16">
+                          <h5 class="f-s-14 f-w-600 m-0 textprimary mat-body-1 hover-text">
+                            {{ appdd.title }}
+                          </h5>
+                          <span class="mat-body-1 f-s-12">{{
+                            appdd.subtitle
+                            }}</span>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-menu>
+
+          <a mat-button class="m-x-8 f-s-16 f-w-500" [routerLink]="['/articles']">Artículos</a>
+          <a mat-button class="m-x-8 f-s-16 f-w-500" [routerLink]="['/contact']" fragment="frm">Contacto</a>
+        </div>
+
+        <div class="d-flex align-items-center gap-10">
+          <a mat-flat-button color="primary" class="m-l-10" [routerLink]="['/authentication/side-login']">Acceder</a>
+
+        </div>
+      </div>
+    </mat-toolbar>
+
+    <div class="overflow-hidden">
+      <div class="container m-t-30">
+
+        <mat-card class="cardWithShadow">
+          <img mat-card-image src="{{blogDetail?.imgUrl}}" alt="Photo of a Shiba Inu" height="440" />
+          <div class="card-overlay h-100 d-flex align-items-end justify-content-end">
+            <mat-chip class="f-s-12 f-w-600 m-y-16 m-r-16 bg-white">{{blogDetail?.type}}</mat-chip>
+          </div>
+          <mat-card-content class="p-24 b-b-1">
+
+            <mat-card-title class="m-t-16 m-b-24 blog-title">{{blogDetail?.title}}
+            </mat-card-title>
+            <div class="d-flex align-items-center justify-content-between m-t-24">
+              <span class="m-l-auto f-s-14 mat-subtitle-2 d-flex align-items-center">
+                <i-tabler name="point" class="icon-14 m-r-4"></i-tabler>
+                {{blogDetail?.createdAt | date: 'dd/MM/yyyy hh:mm:ss a'}}
+              </span>
+              <div class="d-flex align-items-center">
+                <span class="f-s-14 mat-subtitle-2 d-flex align-items-center"><i-tabler name="message-2"
+                    class="icon-18 m-r-4"></i-tabler>{{blogDetail?.commentaries?.length}}</span>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-content class="p-24">
+            <p class="mat-body-1 m-t-16">
+              {{blogDetail?.content}}
+            </p>
+
+
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card class="cardWithShadow">
+          <mat-card-content class="p-24">
+            <mat-card-title class="m-b-24 f-s-21">Escribir comentario</mat-card-title>
+            <form>
+              <mat-form-field appearance="outline" class="w-100">
+                <textarea matInput rows="5" name="commentaryText" [(ngModel)]="commentaryText"></textarea>
+              </mat-form-field>
+              <button mat-flat-button color="primary" type="button" (click)="sendCommentary()"
+                [disabled]="commentaryText === ''">Enviar</button>
+            </form>
+
+            <mat-card-title class="m-t-30 f-s-21 p-t-24">Comentarios
+              <span
+                class="text-primary p-x-12 p-y-8 rounded bg-light-primary f-w-600 m-l-8 f-s-18">{{blogDetail?.commentaries?.length}}</span></mat-card-title>
+
+            <!-- comment -->
+            <div [hidden]="blogDetail?.commentaries?.length === 0">
+              <div class="bg-light rounded p-24 m-t-24" *ngFor="let commentary of blogDetail?.commentaries">
+                <div class="d-flex align-items-center">
+                  <img src="/assets/images/profile/user-2.jpg" alt="user" width="35" class="rounded-circle" />
+                  <span class="mat-body-2 f-w-600 m-l-12">{{commentary.fullName}}</span>
+                  <span class="m-l-12 f-s-12 d-flex align-items-center m-r">
+                    <i-tabler class="icon-7 op-5 d-flex m-r-4" name="circle-filled"></i-tabler>
+                    {{commentary.createdAt | date: 'dd/MM/yyyy hh:mm:ss a'}}
+                  </span>
+                </div>
+                <p class="mat-body-1 m-t-16">
+                  {{commentary.content}}
+                </p>
+
+                <button mat-mini-fab color="primary" class="icon-30 m-t-16" matTooltip="Reply" (click)=toggleReply()>
+                  <i-tabler name="arrow-back-up" class="icon-18"></i-tabler>
+                </button>
+                <button mat-mini-fab color="warn" class="icon-30 m-t-16" type="button" (click)="deleteCommentary(commentary.id)"><i-tabler name="trash" class="icon-18">
+                  </i-tabler>
+                </button>
+              </div>
+              <!-- add comment -->
+              <div [hidden]="istoggleReply">
+                <form class="d-flex align-items-center m-y-24">
+                  <img src="/assets/images/profile/user-1.jpg" alt="user" width="35" class="rounded-circle" />
+                  <mat-form-field appearance="outline" class="w-100 hide-hint m-l-16">
+                    <input matInput placeholder="Reply" name="replyText" [(ngModel)]="replyText" />
+                  </mat-form-field>
+                  <button mat-flat-button color="primary" class="m-l-16" (click)="sendReply()"
+                    [disabled]="replyText === ''">Reply</button>
+                </form>
+              </div>
+              <div>
+              </div>
+              <!-- comment -->
+              <!-- <div class="bg-light rounded p-24 m-t-24 m-l-24">
+                  <div class="d-flex align-items-center">
+                    <img
+                      src="/assets/images/profile/user-3.jpg"
+                      alt="user"
+                      width="35"
+                      class="rounded-circle"
+                    />
+                    <span class="mat-body-2 f-w-600 m-l-12">Ethan Gordon</span>
+                    <span class="m-l-12 f-s-12 d-flex align-items-center">
+                      <i-tabler
+                        class="icon-7 op-5 d-flex m-r-4"
+                        name="circle-filled"
+                      ></i-tabler>
+                      now
+                    </span>
+                  </div>
+                  <p class="mat-body-1 m-t-16">
+                      Diprow wir hilohi ilmi fumow oc co cop iv gi ize tamiv kulok. Bam ci urkati ul negu ovga hivwe toubugof gok imro ale sujoh saput.
+                  </p>
+            
+                  <button
+                    mat-mini-fab
+                    color="primary"
+                    class="icon-30 m-t-16"
+                    matTooltip="Reply" (click)=toggleReply()
+                  >
+                    <i-tabler name="arrow-back-up" class="icon-18"></i-tabler>
+                  </button>
+                </div> -->
+            </div>
+          </mat-card-content>
+        </mat-card>
+
+        <footer class="p-y-30">
+          <div class="container">
+            <div class="row justify-content-center">
+              <div class="col-12 text-center">
+                <div class="f-s-16 m-t-8">
+                  Curso Arquitectura de Software |
+                  <a href="https://upao.edu.pe" target="_blank"
+                    class="mat-subtitle-2 text-primary text-decoration-none"> Universidad Privada Antenor Orrego </a>.
+                </div>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ------------------------------------------------------------------
+          End Testimonial
+          ------------------------------------------------------------------ -->
+
+    <!-- ------------------------------------------------------------------
+          buy section
+          ------------------------------------------------------------------ -->
+
+
+    <!-- ------------------------------------------------------------------
+          buy section
+          ------------------------------------------------------------------ -->
+
+    <!-- ------------------------------------------------------------------
+          footer
+          ------------------------------------------------------------------ -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

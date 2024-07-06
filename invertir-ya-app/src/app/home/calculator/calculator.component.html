@@ -1,0 +1,242 @@
+<mat-sidenav-container>
+    <mat-sidenav-content class="">
+        <mat-toolbar class="topbar topbar-xl m-auto">
+            <div class="container full-width p-xs-6 justify-content-between">
+              <!-- --------------------------------------------------------------- -->
+              <div class="branding p-x-0">
+                <a href="/" *ngIf="options.theme === 'light'">
+                  <img
+                    src="./assets/images/logos/invertirYa-logo.png"
+                    class="align-middle m-2"
+                    alt="logo"
+                  />
+                </a>
+                <a href="/" *ngIf="options.theme === 'dark'">
+                  <img
+                    src="./assets/images/logos/invertirYa-logo.png"
+                    class="align-middle m-2"
+                    alt="logo"
+                  />
+                </a>
+              </div>
+      
+              <!-- --------------------------------------------------------------- -->
+      
+              <div class="d-none d-lg-flex">
+                <!-- --------------------------------------------------------------- -->
+                <!--  Links -->
+                <!-- --------------------------------------------------------------- -->
+                <button mat-button class="m-x-8 f-s-16 f-w-500" [routerLink]="['/']">
+                  Inicio
+                </button>
+      
+                <!-- --------------------------------------------------------------- -->
+                <!--  Links -->
+                <!-- --------------------------------------------------------------- -->
+                <button
+                  mat-button
+                  class="m-x-8 f-s-16 f-w-500"
+                  [matMenuTriggerFor]="appsmenu"
+                  aria-label="Notifications"
+                >
+                  <div class="d-flex align-items-center">
+                    Herramientas
+                    <i-tabler name="chevron-down" class="icon-16 m-l-4"></i-tabler>
+                  </div>
+                </button>
+                <mat-menu #appsmenu="matMenu" class="apps-dd cardWithShadow">
+                  <div class="row">
+                    <div class="col-sm-8 b-r-1 p-r-0">
+                      <div class="p-32 p-b-0">
+                        <div class="row">
+                          <div
+                            class="col-sm-6 text-hover-primary"
+                            *ngFor="let appdd of apps"
+                          >
+                            <a
+                              [routerLink]="[appdd.link]"
+                              class="d-flex align-items-center text-decoration-none m-b-24"
+                            >
+                              <button
+                                mat-mini-fab
+                                class="text-primary bg-light-primary shadow-none rounded"
+                              >
+                                <img [src]="appdd.img" width="20" />
+                              </button>
+      
+                              <div class="m-l-16">
+                                <h5
+                                  class="f-s-14 f-w-600 m-0 textprimary mat-body-1 hover-text"
+                                >
+                                  {{ appdd.title }}
+                                </h5>
+                                <span class="mat-body-1 f-s-12">{{
+                                  appdd.subtitle
+                                }}</span>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-menu>
+      
+                <a
+                  mat-button
+                  class="m-x-8 f-s-16 f-w-500"
+                  [routerLink]="['/articles']"
+                  >Artículos</a
+                >
+                <a
+                  mat-button
+                  class="m-x-8 f-s-16 f-w-500"
+                  [routerLink]="['/contact']" fragment="frm"
+                  >Contacto</a
+                >
+              </div>
+      
+              <div class="d-flex align-items-center gap-10">
+                <a
+                  mat-flat-button
+                  color="primary"
+                  class="m-l-10"
+                  [routerLink]="['/authentication/side-login']"
+                  >Acceder</a
+                >
+    
+              </div>
+            </div>
+          </mat-toolbar>
+
+          <div class="overflow-hidden">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-11">
+                  <div class="text-center">
+                    <h1 class="banner-title m-0">
+                      Simulador Hipotecario
+                    </h1>
+                    <p class="f-s-18 p-y-24 m-t-12 m-0 banner-subtitle">
+                      Descubre cuál podría ser la cuota de tu nuevo hogar
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="blank-layout-container justify-content-center align-items-center" id="frm">
+                <div
+                class="position-relative row w-100 h-100 bg-gredient justify-content-center"
+              >
+                  <div class="col-lg-12 d-flex align-items-center">
+                    <mat-card class="cardWithShadow boxed-auth" style="max-width: 600px !important;">
+                      <mat-card-content class="p-32">
+                        <div class="text-center">
+                          <h2 class="m-0 f-w-700">InvertirYa!</h2>
+                        </div>
+              
+                        <div class="text-center m-t-30">Ingresa la información y simula tus cuotas mensuales.</div>
+              
+                        <form class="m-t-30" [formGroup]="form" (ngSubmit)="submit()">
+                          <div class="row m-t-20">
+                            <div class="col-lg-6">
+                              <!-- input -->
+                              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block"
+                                >Valor total del inmueble</mat-label
+                              >
+                              <mat-form-field appearance="outline" class="w-100" color="primary">
+                                <input matInput type="text" placeholder="Ej. 100,000" formControlName="principal" appOnlyNumbers (blur)="onInputChange($event)"/>
+                              </mat-form-field>
+                      
+                              <!-- input -->
+                              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block"
+                                >Tasa de interés anual</mat-label
+                              >
+                              <mat-form-field appearance="outline" class="w-100">
+                                <mat-select value="male" formControlName="annualInterest">
+                                  <mat-option value="10">10%</mat-option>
+                                  <mat-option value="15">15%</mat-option>
+                                  <mat-option value="20">20%</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                      
+                            </div>
+                            <div class="col-lg-6">
+                              <!-- input -->
+                              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block"
+                                >Cuota Inicial</mat-label
+                              >
+                              <mat-form-field appearance="outline" class="w-100" color="primary">
+                                <input matInput type="text" placeholder="Ej. 10,000" formControlName="cuotaInicial" appOnlyNumbers/>
+                              </mat-form-field>
+                      
+                              <!-- input -->
+                              <mat-label class="mat-subtitle-2 f-w-600 m-b-8 d-block"
+                                >Deseo financiarlo en</mat-label
+                              >
+                              <div>
+                                <label class="f-w-500 mat-body-1">{{ form.get('period').value }} años</label>
+                              </div>
+                              <mat-slider
+                              class="example-margin"
+                              [disabled]="disabled"
+                              [max]="max"
+                              [min]="min"
+                              [step]="step"
+                              [discrete]="thumbLabel"
+                              [showTickMarks]="showTicks"
+                            >
+                              <input matSliderThumb formControlName="period" />
+                            </mat-slider>
+                            </div>
+                          </div>
+                          <button mat-flat-button color="primary" class="w-100" [disabled]="!form.valid">
+                            Enviar
+                          </button>
+                        </form>
+                        <div [hidden]="cuotaMensual === 0" class="p-24 rounded bg-light-primary m-t-16">
+                          <h2 class="mat-body-2 f-w-600 m-b-6">Tu cuota mensual sería: {{cuotaMensual | currency:'PEN'}}</h2>
+                          <label class="f-w-500 mat-body-1">financiado en {{ form.get('period').value }} años</label>
+                        </div>
+                      </mat-card-content>
+                    </mat-card>
+                  </div>
+                </div>
+              </div>
+
+              <footer class="p-y-30">
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="col-12 text-center">
+                      <div class="f-s-16 m-t-8">
+                        Curso Arquitectura de Software |
+                        <a
+                          href="https://upao.edu.pe" target="_blank"
+                          class="mat-subtitle-2 text-primary text-decoration-none"
+                          > Universidad Privada Antenor Orrego </a
+                        >.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+            </div>
+          </div>
+
+          <!-- ------------------------------------------------------------------
+          End Testimonial
+          ------------------------------------------------------------------ -->
+      
+          <!-- ------------------------------------------------------------------
+          buy section
+          ------------------------------------------------------------------ -->
+
+      
+          <!-- ------------------------------------------------------------------
+          buy section
+          ------------------------------------------------------------------ -->
+      
+          <!-- ------------------------------------------------------------------
+          footer
+          ------------------------------------------------------------------ -->
+    </mat-sidenav-content>
+</mat-sidenav-container>

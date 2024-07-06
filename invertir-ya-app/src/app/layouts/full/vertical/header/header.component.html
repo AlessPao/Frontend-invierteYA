@@ -1,0 +1,99 @@
+<mat-toolbar class="topbar">
+  <!-- --------------------------------------------------------------- -->
+  <!-- Desktop Menu -->
+  <button
+    mat-icon-button
+    (click)="toggleCollapsed.emit()"
+    *ngIf="showToggle"
+    class="d-flex justify-content-center"
+  >
+    <i-tabler name="align-left" class="icon-20 d-flex"></i-tabler>
+  </button>
+
+  <!-- Mobile Menu -->
+  <button
+    mat-icon-button
+    (click)="toggleMobileNav.emit()"
+    *ngIf="!showToggle"
+    class="d-flex justify-content-center"
+  >
+    <i-tabler name="align-left" class="icon-20 d-flex"></i-tabler>
+  </button>
+  <!-- --------------------------------------------------------------- -->
+
+  <span class="flex-1-auto"></span>
+
+  <!-- --------------------------------------------------------------- -->
+  <!--  Search -->
+  <!-- --------------------------------------------------------------- -->
+
+
+  <!-- --------------------------------------------------------------- -->
+  <!-- Messages Dropdown -->
+  <!-- --------------------------------------------------------------- -->
+
+
+  <!-- --------------------------------------------------------------- -->
+  <!-- profile Dropdown -->
+  <!-- --------------------------------------------------------------- -->
+  <button
+    mat-fab
+    extended
+    color="inherit"
+    [matMenuTriggerFor]="profileMenu"
+    aria-label="Notifications" class="disabled-hover"
+  >
+    <div class="d-flex align-items-center">
+      <img
+        src="/assets/images/profile/user5.jpg"
+        class="rounded-circle object-cover"
+        width="40"
+      />
+
+      <div class="m-l-16 text-left d-none d-lg-flex">
+        <div>
+          <h5 class="f-s-16">Administrador</h5>
+          <!-- <span class="f-s-14 mat-body-1">Admin</span> -->
+        </div>
+      </div>
+    </div>
+  </button>
+  <mat-menu
+    #profileMenu="matMenu"
+    xPosition="before"
+    class="topbar-dd cardWithShadow"
+  >
+    <ng-scrollbar class="position-relative" style="height: 250px">
+      <div class="p-x-32 p-y-16">
+        <h6 class="f-s-16 f-w-600 m-0">Perfil</h6>
+
+        <div class="d-flex align-items-center p-b-24 b-b-1 m-t-16">
+          <img
+            src="/assets/images/profile/user5.jpg"
+            class="rounded-circle"
+            width="95"
+          />
+          <div class="m-l-16">
+            <h6 class="f-s-16 f-w-600 m-0">Administrador</h6>
+            <span class="f-s-14 mat-body-1 d-block m-b-4">Admin</span>
+            <span class="d-flex align-items-center">
+              <i-tabler name="mail" class="icon-15 m-r-4"></i-tabler>
+              admin@upao.edu.pe
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-y-12 p-x-32">
+        <button
+          (click)="logout()"
+          mat-flat-button
+          color="primary"
+          class="w-100"
+        >
+          Salir
+        </button>
+      </div>
+    </ng-scrollbar>
+  </mat-menu>
+</mat-toolbar>

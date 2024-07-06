@@ -1,0 +1,49 @@
+<mat-card class="cardWithShadow">
+  <mat-card-content>
+    <div class="row justify-content-between">
+      <div class="p-16 p-b-0">
+        <button mat-flat-button color="primary" class="w-100 btn-block" type="button" (click)="selectBlog({}, 'Registrar')">
+          Crear Artículo
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<div class="row">
+
+  <div class="col-sm-6 col-lg-4" *ngFor="let blogPost of articles">
+    <mat-card class="cardWithShadow card2 position-relative card-hover cursor-pointer">
+      <img mat-card-image src="{{ blogPost.imgUrl }}" alt="Photo of a Shiba Inu"/>
+      <div class="card-overlay h-100 d-flex p-16 p-y-0 align-items-end justify-content-between"    type="button"
+      (click)="selectBlog(blogPost, 'Editar')">
+        <mat-chip class="f-s-12 m-y-16 f-w-600 bg-white">{{
+          blogPost.type
+          }}</mat-chip>
+        <mat-chip class="f-s-12 f-w-600 m-y-16 bg-white">{{
+          blogPost.createdAt | date: 'dd/MM/yyyy hh:mm:ss a'
+          }}</mat-chip>
+      </div>
+
+      <mat-card-content class="p-y-24">
+        <mat-card-title class="mat-headline-6 m-t-15">{{
+          blogPost.title
+          }}</mat-card-title>
+        <div class="d-flex align-items-center justify-content-center m-t-24">
+          <div class="d-flex align-items-center">
+            <span class="f-s-14 mat-subtitle-2 d-flex align-items-center"><i-tabler name="message-2"
+                class="icon-18 m-r-4"></i-tabler>{{ blogPost.commentaries.length }}</span>
+          </div>
+          <span class="m-l-auto f-s-14 mat-subtitle-2 d-flex align-items-center">
+            <i-tabler name="point" class="icon-14 m-r-4"></i-tabler>
+            {{ blogPost.createdAt }}
+          </span>
+        </div>
+        <div class="d-flex align-items-center justify-content-center m-t-12">
+          <a mat-button color="warn" class="w-100" type="button" (click)="delete(blogPost.id)">
+            Eliminar
+          </a>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

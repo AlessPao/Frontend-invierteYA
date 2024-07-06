@@ -1,0 +1,359 @@
+<mat-sidenav-container>
+    <mat-sidenav-content class="">
+        <mat-toolbar class="topbar topbar-xl m-auto">
+            <div class="container full-width p-xs-6 justify-content-between">
+              <!-- --------------------------------------------------------------- -->
+              <div class="branding p-x-0">
+                <a href="/" *ngIf="options.theme === 'light'">
+                  <img
+                    src="./assets/images/logos/invertirYa-logo.png"
+                    class="align-middle m-2"
+                    alt="logo"
+                  />
+                </a>
+                <a href="/" *ngIf="options.theme === 'dark'">
+                  <img
+                    src="./assets/images/logos/invertirYa-logo.png"
+                    class="align-middle m-2"
+                    alt="logo"
+                  />
+                </a>
+              </div>
+      
+              <!-- --------------------------------------------------------------- -->
+      
+              <div class="d-none d-lg-flex">
+                <!-- --------------------------------------------------------------- -->
+                <!--  Links -->
+                <!-- --------------------------------------------------------------- -->
+                <button mat-button class="m-x-8 f-s-16 f-w-500" [routerLink]="['/']">
+                  Inicio
+                </button>
+      
+                <!-- --------------------------------------------------------------- -->
+                <!--  Links -->
+                <!-- --------------------------------------------------------------- -->
+                <button
+                  mat-button
+                  class="m-x-8 f-s-16 f-w-500"
+                  [matMenuTriggerFor]="appsmenu"
+                  aria-label="Notifications"
+                >
+                  <div class="d-flex align-items-center">
+                    Herramientas
+                    <i-tabler name="chevron-down" class="icon-16 m-l-4"></i-tabler>
+                  </div>
+                </button>
+                <mat-menu #appsmenu="matMenu" class="apps-dd cardWithShadow">
+                  <div class="row">
+                    <div class="col-sm-8 b-r-1 p-r-0">
+                      <div class="p-32 p-b-0">
+                        <div class="row">
+                          <div
+                            class="col-sm-6 text-hover-primary"
+                            *ngFor="let appdd of apps"
+                          >
+                            <a
+                              [routerLink]="[appdd.link]"
+                              class="d-flex align-items-center text-decoration-none m-b-24"
+                            >
+                              <button
+                                mat-mini-fab
+                                class="text-primary bg-light-primary shadow-none rounded"
+                              >
+                                <img [src]="appdd.img" width="20" />
+                              </button>
+      
+                              <div class="m-l-16">
+                                <h5
+                                  class="f-s-14 f-w-600 m-0 textprimary mat-body-1 hover-text"
+                                >
+                                  {{ appdd.title }}
+                                </h5>
+                                <span class="mat-body-1 f-s-12">{{
+                                  appdd.subtitle
+                                }}</span>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-menu>
+      
+                <a
+                  mat-button
+                  class="m-x-8 f-s-16 f-w-500"
+                  [routerLink]="['/articles']"
+                  >Artículos</a
+                >
+                <a
+                  mat-button
+                  class="m-x-8 f-s-16 f-w-500"
+                  [routerLink]="['/contact']" fragment="frm"
+                  >Contacto</a
+                >
+              </div>
+      
+              <div class="d-flex align-items-center gap-10">
+                <a
+                  mat-flat-button
+                  color="primary"
+                  class="m-l-10"
+                  [routerLink]="['/authentication/side-login']"
+                  >Acceder</a
+                >
+    
+              </div>
+            </div>
+          </mat-toolbar>
+
+          <div class="overflow-hidden banner-section">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-lg-11">
+                  <div class="text-center">
+                    <h1 class="banner-title m-0">
+                      ¡InvertirYa! – Tu Puerta a las Mejores Oportunidades en Bienes Raíces!
+                    </h1>
+                    <p class="f-s-18 p-y-24 m-t-12 m-0 banner-subtitle">
+                      En InvertirYa!, transformamos tus sueños de inversión en realidad.
+                    </p>
+                    <div class="m-t-24 hstack justify-content-center">
+                      <a
+                        mat-flat-button
+                        color="primary"
+                        [routerLink]="['/authentication/side-login']"
+                        class="btn-custom"
+                        >Artículos</a
+                      >
+                      <a
+                        mat-stroked-button
+                        color="primary"
+                        [routerLink]="['/contact']" fragment="frm"
+                        class="btn-custom border-primary"
+                        >Contáctanos</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <!-- slider -->
+            <div
+              class="slider-wrapper overflow-hidden position-relative m-t-40 p-t-30 p-b-10"
+            >
+              <div class="d-flex flex-row w-100">
+                <div class="slider-img">
+                  <img
+                    src="assets/images/landingpage/slider-group-1.jpg"
+                    alt="bg-img"
+                  />
+                </div>
+                <div class="slider-img">
+                  <img
+                    src="assets/images/landingpage/slider-group-2.jpg"
+                    alt="bg-img"
+                  />
+                </div>
+                <div class="slider-img">
+                  <img
+                    src="assets/images/landingpage/slider-group-3.jpg"
+                    alt="bg-img"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="blank-layout-container justify-content-center align-items-center" id="frm">
+            <div
+              class="position-relative row w-100 h-100 bg-gredient justify-content-center"
+            >
+              <div class="col-lg-4 d-flex align-items-center">
+                <mat-card class="cardWithShadow boxed-auth">
+                  <mat-card-content class="p-32">
+                    <div class="text-center">
+                      <h2 class="m-0 f-w-700">Contáctanos</h2>
+                    </div>
+          
+                    <div class="or-border m-t-30">Formulario de contacto</div>
+          
+                    <form class="m-t-30" [formGroup]="form" (ngSubmit)="submit()">
+                      <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                        >Nombre Completo</mat-label
+                      >
+                      <mat-form-field appearance="outline" class="w-100" color="primary">
+                        <input matInput formControlName="fullName" />
+                        <mat-hint
+                          *ngIf="f['fullName'].touched && f['fullName'].invalid"
+                          class="m-b-16 error-msg"
+                        >
+                          <div
+                            class="text-error"
+                            *ngIf="f['fullName'].errors && f['fullName'].errors['required']"
+                          >
+                            Nombre completo es requerido.
+                          </div>
+                          <div
+                            class="text-error"
+                            *ngIf="f['fullName'].errors && f['fullName'].errors['minlength']"
+                          >
+                            Mínimo 5 caracteres.
+                          </div>
+                          <div
+                          class="text-error"
+                          *ngIf="f['fullName'].errors && f['fullName'].errors['maxlength']"
+                          >
+                          Máximo 60 caracteres.
+                        </div>
+                        </mat-hint>
+                      </mat-form-field>
+                      <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                        >Email</mat-label
+                      >
+                      <mat-form-field appearance="outline" class="w-100" color="primary">
+                        <input matInput type="email" formControlName="email" />
+                        <mat-hint
+                          *ngIf="f['email'].touched && f['email'].invalid"
+                          class="m-b-16 error-msg"
+                        >
+                          <div
+                            class="text-error"
+                            *ngIf="f['email'].errors && f['email'].errors['required']"
+                          >
+                            Email es requerido.
+                          </div>
+                          <div
+                          class="text-error"
+                          *ngIf="f['email'].errors && f['email'].errors['email']"
+                          >
+                            Email no válido.
+                          </div>
+                        </mat-hint>
+                      </mat-form-field>
+                      <!-- password -->
+                      <mat-label class="mat-subtitle-2 f-s-14 f-w-600 m-b-12 d-block"
+                        >Mensaje</mat-label
+                      >
+                      <mat-form-field appearance="outline" class="w-100" color="primary">
+                        <textarea matInput rows="5" formControlName="message"></textarea>
+                        <mat-hint
+                          *ngIf="f['message'].touched && f['message'].invalid"
+                          class="m-b-16 error-msg"
+                        >
+                          <div
+                            class="text-error"
+                            *ngIf="
+                              f['message'].errors && f['message'].errors['required']
+                            "
+                          >
+                            El mensaje es requerido.
+                          </div>
+                          <div
+                          class="text-error"
+                          *ngIf="
+                            f['message'].errors && f['message'].errors['minlength']
+                          "
+                          >
+                            Mínimo 10 caracteres.
+                          </div>
+                          <div
+                          class="text-error"
+                          *ngIf="
+                            f['message'].errors && f['message'].errors['maxlength']
+                          "
+                          >
+                            Máximo 200 caracteres.
+                          </div>
+                        </mat-hint>
+                      </mat-form-field>
+          
+                      <button mat-flat-button color="primary" class="w-100" [disabled]="!form.valid">
+                        Enviar
+                      </button>
+                      <!-- input -->
+                    </form>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+          
+          <div class="spacer bg-white" style="padding: 40px 0 100px !important">
+          </div>
+          <!-- ------------------------------------------------------------------
+          End Testimonial
+          ------------------------------------------------------------------ -->
+      
+          <!-- ------------------------------------------------------------------
+          buy section
+          ------------------------------------------------------------------ -->
+          <div class="bg-white">
+            <div class="container">
+              <div class="bg-dark rounded p-32 position-relative">
+                <div class="row justify-content-between">
+                  <div class="col-lg-6">
+                    <h3 class="m-t-0 section-title2 text-white m-b-8">
+                      ¿No encuentras respuestas a tus preguntas?
+                    </h3>
+                    <span class="f-s-16 m-b-40 m-t-8 d-block text-white"
+                      >Contáctate con nostrosos</span
+                    >
+                    <div class="hstack">
+                      <a
+                        mat-flat-button
+                        [routerLink]="['/contact']" fragment="frm"
+                        color="primary"
+                        class="btn-custom sm"
+                        >Contácto</a
+                      >
+                      <!-- <a
+                        mat-stroked-button
+                        href="https://support.wrappixel.com/"
+                        color="primary"
+                        class="btn-custom sm border-accent"
+                        >Submit Ticket</a
+                      > -->
+                    </div>
+                  </div>
+                  <div class="col-lg-5 text-right">
+                    <img
+                      src="assets/images/landingpage/background/c2a.png"
+                      alt="img"
+                      width="596"
+                      class="c2a-img d-none d-lg-flex"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <!-- ------------------------------------------------------------------
+          buy section
+          ------------------------------------------------------------------ -->
+      
+          <!-- ------------------------------------------------------------------
+          footer
+          ------------------------------------------------------------------ -->
+          <footer class="p-y-30 bg-white">
+            <div class="container">
+              <div class="row justify-content-center">
+                <div class="col-12 text-center">
+                  <div class="f-s-16 m-t-8">
+                    Curso Arquitectura de Software |
+                    <a
+                      href="https://upao.edu.pe" target="_blank"
+                      class="mat-subtitle-2 text-primary text-decoration-none"
+                      > Universidad Privada Antenor Orrego </a
+                    >.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

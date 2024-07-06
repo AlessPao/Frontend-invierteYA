@@ -1,0 +1,184 @@
+<mat-sidenav-container>
+    <mat-sidenav-content class="">
+        <mat-toolbar class="topbar topbar-xl m-auto">
+            <div class="container full-width p-xs-6 justify-content-between">
+              <!-- --------------------------------------------------------------- -->
+              <div class="branding p-x-0">
+                <a href="/" *ngIf="options.theme === 'light'">
+                  <img
+                    src="./assets/images/logos/invertirYa-logo.png"
+                    class="align-middle m-2"
+                    alt="logo"
+                  />
+                </a>
+                <a href="/" *ngIf="options.theme === 'dark'">
+                  <img
+                    src="./assets/images/logos/invertirYa-logo.png"
+                    class="align-middle m-2"
+                    alt="logo"
+                  />
+                </a>
+              </div>
+      
+              <!-- --------------------------------------------------------------- -->
+      
+              <div class="d-none d-lg-flex">
+                <!-- --------------------------------------------------------------- -->
+                <!--  Links -->
+                <!-- --------------------------------------------------------------- -->
+                <button mat-button class="m-x-8 f-s-16 f-w-500" [routerLink]="['/']">
+                  Inicio
+                </button>
+      
+                <!-- --------------------------------------------------------------- -->
+                <!--  Links -->
+                <!-- --------------------------------------------------------------- -->
+                <button
+                  mat-button
+                  class="m-x-8 f-s-16 f-w-500"
+                  [matMenuTriggerFor]="appsmenu"
+                  aria-label="Notifications"
+                >
+                  <div class="d-flex align-items-center">
+                    Herramientas
+                    <i-tabler name="chevron-down" class="icon-16 m-l-4"></i-tabler>
+                  </div>
+                </button>
+                <mat-menu #appsmenu="matMenu" class="apps-dd cardWithShadow">
+                  <div class="row">
+                    <div class="col-sm-8 b-r-1 p-r-0">
+                      <div class="p-32 p-b-0">
+                        <div class="row">
+                          <div
+                            class="col-sm-6 text-hover-primary"
+                            *ngFor="let appdd of apps"
+                          >
+                            <a
+                              [routerLink]="[appdd.link]"
+                              class="d-flex align-items-center text-decoration-none m-b-24"
+                            >
+                              <button
+                                mat-mini-fab
+                                class="text-primary bg-light-primary shadow-none rounded"
+                              >
+                                <img [src]="appdd.img" width="20" />
+                              </button>
+      
+                              <div class="m-l-16">
+                                <h5
+                                  class="f-s-14 f-w-600 m-0 textprimary mat-body-1 hover-text"
+                                >
+                                  {{ appdd.title }}
+                                </h5>
+                                <span class="mat-body-1 f-s-12">{{
+                                  appdd.subtitle
+                                }}</span>
+                              </div>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-menu>
+      
+                <a
+                  mat-button
+                  class="m-x-8 f-s-16 f-w-500"
+                  [routerLink]="['/articles']"
+                  >Artículos</a
+                >
+                <a
+                  mat-button
+                  class="m-x-8 f-s-16 f-w-500"
+                  [routerLink]="['/contact']" fragment="frm"
+                  >Contacto</a
+                >
+              </div>
+      
+              <div class="d-flex align-items-center gap-10">
+                <a
+                  mat-flat-button
+                  color="primary"
+                  class="m-l-10"
+                  [routerLink]="['/authentication/side-login']"
+                  >Acceder</a
+                >
+    
+              </div>
+            </div>
+          </mat-toolbar>
+
+          <div class="overflow-hidden">
+            <div class="container m-t-30">
+              <div class="row">
+              
+                <div class="col-sm-6 col-lg-4" *ngFor="let blogPost of articles">
+                  <mat-card class="cardWithShadow card2 position-relative card-hover cursor-pointer m-t-15">
+                    <img mat-card-image src="{{ blogPost.imgUrl }}" alt="Photo of a Shiba Inu"/>
+                    <div class="card-overlay h-100 d-flex p-16 p-y-0 align-items-end justify-content-between"    type="button"
+                    (click)="selectBlog(blogPost, 'Editar')">
+                      <mat-chip class="f-s-12 m-y-16 f-w-600 bg-white">{{
+                        blogPost.type
+                        }}</mat-chip>
+                      <mat-chip class="f-s-12 f-w-600 m-y-16 bg-white">{{
+                        blogPost.createdAt | date: 'dd/MM/yyyy hh:mm:ss a'
+                        }}</mat-chip>
+                    </div>
+              
+                    <mat-card-content class="p-y-24">
+                      <mat-card-title class="mat-headline-6 m-t-15">{{
+                        blogPost.title
+                        }}</mat-card-title>
+                      <div class="d-flex align-items-center justify-content-center m-t-24">
+                        <div class="d-flex align-items-center">
+                          <span class="f-s-14 mat-subtitle-2 d-flex align-items-center"><i-tabler name="message-2"
+                              class="icon-18 m-r-4"></i-tabler>{{ blogPost.commentaries.length }}</span>
+                        </div>
+                        <!-- <span class="m-l-auto f-s-14 mat-subtitle-2 d-flex align-items-center">
+                          <i-tabler name="point" class="icon-14 m-r-4"></i-tabler>
+                          {{ blogPost.createdAt }}
+                        </span> -->
+                      </div>
+                    </mat-card-content>
+                  </mat-card>
+                </div>
+              </div>
+
+              <footer class="p-y-30">
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <div class="col-12 text-center">
+                      <div class="f-s-16 m-t-8">
+                        Curso Arquitectura de Software |
+                        <a
+                          href="https://upao.edu.pe" target="_blank"
+                          class="mat-subtitle-2 text-primary text-decoration-none"
+                          > Universidad Privada Antenor Orrego </a
+                        >.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </footer>
+            </div>
+          </div>
+
+          <!-- ------------------------------------------------------------------
+          End Testimonial
+          ------------------------------------------------------------------ -->
+      
+          <!-- ------------------------------------------------------------------
+          buy section
+          ------------------------------------------------------------------ -->
+
+      
+          <!-- ------------------------------------------------------------------
+          buy section
+          ------------------------------------------------------------------ -->
+      
+          <!-- ------------------------------------------------------------------
+          footer
+          ------------------------------------------------------------------ -->
+    </mat-sidenav-content>
+</mat-sidenav-container>
